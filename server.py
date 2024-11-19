@@ -2,7 +2,7 @@
     analysis to be executed over the Flask channel and deployed on
     localhost:5000.
 '''
-# Import Flask, render_template, request from the flask pramework package 
+# Import Flask, render_template, request from the flask pramework package
 from flask import Flask, render_template, request
 
 # Import the emotion detector function
@@ -26,15 +26,16 @@ def emo_detector():
 
     # Extract the label and score from the response
     label = response['dominant_emotion']
-    
+
     # Check if the label is None, indicating an error or invalid input
     if label is None:
         return "Invalid input! Try again."
-    else:
-        # Return a formatted string with the sentiment label and score
-        return (f'''For the given statement, the system response is 'anger': {response['anger']}, 
-        'disgust': {response['disgust']}, 'fear': {response['fear']}, 'joy': {response['joy']} and 
-        'sadness': {response['sadness']}. The dominant emotion is <b>{response['dominant_emotion']}</b>.''')
+
+    # Return a formatted string with the sentiment label and score
+    return f'''For the given statement, the system response is 'anger': {response['anger']},
+    'disgust': {response['disgust']}, 'fear': {response['fear']}, 'joy': {response['joy']} and 
+    'sadness': {response['sadness']}. The dominant emotion is 
+    <b>{response['dominant_emotion']}</b>.'''
 
 @app.route("/")
 def render_index_page():
@@ -44,5 +45,4 @@ def render_index_page():
     return render_template('index.html')
 
 if __name__ == "__main__":
-    ''' This functions executes the flask app and deploys it on localhost:5000 '''
     app.run(host="0.0.0.0", port=5000)
